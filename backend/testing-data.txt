@@ -1,0 +1,54 @@
+The following data is tested with postman.
+
+
+routes in the app:
+http://localhost:8000/api/users/register
+http://localhost:8000/api/users/login
+http://localhost:8000/api/sellers/become-seller
+http://localhost:8000/api/services/
+http://localhost:8000/api/services/
+http://localhost:8000/api/services/
+http://localhost:8000/api/services/
+
+
+way to test:
+    -create a folder.
+        -add a file.
+        -select method to post/get as per requirement
+        -select body
+            -select raw
+            -select json as format
+
+METHOD: POST
+url: http://localhost:8000/api/users/register
+{
+    "username": "testuser5",
+    "email": "testuser@example5.com",
+    "password": "password123",
+    "isSeller": false
+}
+change number and run the code.
+
+POST http://localhost:8000/api/users/login
+
+{
+    "email": "testuser@example.com",
+    "password": "password123"
+}
+
+reply {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDMxOGYyOWVmMzdiOTQ4MjNjMmU3NiIsImlhdCI6MTcyNTExMTE3OSwiZXhwIjoxNzI1MTE4Mzc5fQ.gQJxrGFWGRobTriAZHPa9YG77CeI1c3FXszkN1mCZm4"
+        
+}
+
+PUT:
+{
+  "serviceName": "Plumbing",
+  "description": "Expert plumbing services.",
+  "toleName": "Sundhara",
+  "ward": "5",
+  "city": "Kathmandu",
+  "state": "Bagmati"
+}
+
+
