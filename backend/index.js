@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const cors = require('cors');
 const connectDB = require("./config/db");
 const userRoutes = require('./routes/userRoutes');
 const sellerRoutes = require('./routes/sellerRoutes');
@@ -18,7 +19,13 @@ connectDB();
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    optionsSuccessStatus: 200
+}));
 
 // routes
 app.use('/api/users', userRoutes);
