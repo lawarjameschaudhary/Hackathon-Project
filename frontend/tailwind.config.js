@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors:{
         "rato" : "#FF0000"
+        
       },
       fontFamily: {
         "sabai" : 'rubik' ,
