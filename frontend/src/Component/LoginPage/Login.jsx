@@ -27,11 +27,8 @@ const Login = () => {
           email: email,
           password: password
         }),
-        credentials: "include",
-        "Authorization": `Bearer ${token}`
+        credentials: "include", // Include credentials if needed for cookies
       });
-
-      console.log("Email:", email);
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -40,7 +37,7 @@ const Login = () => {
       }
 
       const data = await response.json();
-      console.log("Response data:", data);
+      console.log(data);
 
       if (data.token) {
         localStorage.setItem("token", data.token);
@@ -63,7 +60,6 @@ const Login = () => {
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px flex flex-col gap-5">
             <div>
               <input

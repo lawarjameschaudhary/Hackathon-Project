@@ -1,34 +1,58 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 function Navbar() {
-    const [navButton, setNavButton] = useState();
-    
-    const toggleButton = () => [
-        setNavButton(!navButton)
-    ]
+  const [navButton, setNavButton] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+
+  const toggleButton = () => {
+    setNavButton(!navButton);
+  };
+
+  const handleSearch = async (e) => {
+    setSearchQuery(e.target.value);
+
+    if (e.target.value.length > 2) { // Start searching after user types 3 characters
+      try {
+        const response = await fetch(`https://countryapi.io/api/all`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch search results');
+        }
+
+        const results = await response.json();
+        console.log(results)
+        setSearchResults(results);
+      } catch (error) {
+        console.error('Error during search:', error);
+      }
+    } else {
+      setSearchResults([]);
+    }
+  };
 
   return (
     <div className=''>
-
       <div className='bg-rato'>
-      <div className='flex justify-between  px-3 md:px-24 py-3 shadow-xl shadow-blue-200'>
-        <div className="nav-logo text-white  text-2xl font-extrabold">
-          <div>Hamro Kaam</div>
-        </div>
-        <div className="nav-list  gap-20 text-white hidden md:flex text-xl font-ajhai-arko">
-          <NavLink to='/services' >Switch</NavLink>
-          <NavLink to='/about' >About</NavLink>
-          <NavLink to='/something' >Inquiry</NavLink>
-        </div>
-        <button onClick={toggleButton} className='text-white flex md:hidden'>
-            <img src="./src/assets/main-menu.png" alt=""  className='w-9'/>
+        <div className='flex justify-between items-center px-3 md:px-24 py-3'>
+          <div className="nav-logo text-2xl font-extrabold">
+            <div className='font-logo text-2xl'><NavLink to='/'>Mero Kaam</NavLink></div>
+          </div>
+       
+          <div className="nav-list gap-20 hidden md:flex text-xl font-ajhai-arko">
+            <button className='text-xer'>Switch to selling</button>
+            <NavLink className={({isActive}) => isActive? "active text-blue-400" : "text-black"} to='/about'>About</NavLink>
+            <NavLink className={({isActive}) => isActive? "active text-blue-400" : "text-black"} to='/something'>Inquiry</NavLink>
+          </div>
+          <button onClick={toggleButton} className='flex md:hidden'>
+            <img src="./src/assets/main-menu.png" alt="" className='w-9'/>
           </button>
+        </div>
       </div>
-      </div>
-    <div className='md:hidden flex flex-col relative '>
-    {navButton && (
-          <div className='bg-gray-200 absolute right-0 rounded-lg top-0  h-screen w-screen p-3 z-20'>
+      <div className='md:hidden flex flex-col relative '>
+        {navButton && (
+          <div className='bg-gray-200 absolute right-0 rounded-lg top-0 h-screen w-screen p-3 z-20'>
             <ul className='flex flex-col gap-5'>
               <li>Switch</li>
               <li>About</li>
@@ -36,9 +60,9 @@ function Navbar() {
             </ul>
           </div>
         )}
+      </div>
     </div>
-    </div>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
