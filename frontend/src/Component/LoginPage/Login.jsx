@@ -27,7 +27,7 @@ const Login = () => {
           email: email,
           password: password
         }),
-        credentials: "include", // Include credentials if needed for cookies
+        credentials: "include", 
       });
 
       if (!response.ok) {
@@ -41,7 +41,7 @@ const Login = () => {
 
       if (data.token) {
         localStorage.setItem("token", data.token);
-        window.location.href = "/"; // Redirect to home or another page
+        window.location.href = "/"; 
       } else {
         toast.error("Login failed. Please try again.");
       }

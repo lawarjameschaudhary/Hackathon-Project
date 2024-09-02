@@ -37,19 +37,23 @@ function Navbar() {
       <div className='bg-rato'>
         <div className='flex justify-between items-center px-3 md:px-24 py-3'>
           <div className="nav-logo text-2xl font-extrabold">
-            <div className='font-logo text-2xl'><NavLink to='/'>Mero Kaam</NavLink></div>
+            <NavLink to='/' className='font-logo text-2xl'>Mero Kaam</NavLink>
           </div>
-       
-          <div className="nav-list gap-20 hidden md:flex text-xl font-ajhai-arko">
+          <div className="nav-list gap-20 hidden md:flex items-center text-xl font-ajhai-arko">
             <button className='text-xer'>Switch to selling</button>
             <NavLink className={({isActive}) => isActive? "active text-blue-400" : "text-black"} to='/about'>About</NavLink>
             <NavLink className={({isActive}) => isActive? "active text-blue-400" : "text-black"} to='/something'>Inquiry</NavLink>
+            <div className='bg-black px-10 py-2 text-white rounded-md'>
+              user
+      </div>
           </div>
           <button onClick={toggleButton} className='flex md:hidden'>
             <img src="./src/assets/main-menu.png" alt="" className='w-9'/>
           </button>
         </div>
+        
       </div>
+      
       <div className='md:hidden flex flex-col relative '>
         {navButton && (
           <div className='bg-gray-200 absolute right-0 rounded-lg top-0 h-screen w-screen p-3 z-20'>

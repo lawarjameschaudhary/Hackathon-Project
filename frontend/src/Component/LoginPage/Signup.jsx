@@ -23,7 +23,7 @@ const Signup = () => {
     }
 
     try {
-      // Sending the signup data to the backend
+    
       const response = await fetch("http://localhost:8000/api/users/register", {
         method: "POST",
         headers: {
@@ -35,7 +35,7 @@ const Signup = () => {
           email: email,
           password: password,
         }),
-        credentials: "include", // Include credentials like cookies
+        credentials: "include", 
       });
 
       if (!response.ok) {
@@ -47,11 +47,11 @@ const Signup = () => {
       const data = await response.json();
       console.log(data);
 
-      // Handle the response from the backend
+     
       if (data.token) {
-        // Save the token to localStorage for further authentication
+    
         localStorage.setItem("token", data.token);
-        // Redirect the user to the home page after successful signup
+        
         window.location.href = "/login";
       } else {
         toast.error("Signup failed. Please try again.");

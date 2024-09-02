@@ -5,7 +5,7 @@ import Home from './Component/Home/Home'
 import { Route, Routes } from 'react-router-dom'
 import Login from './Component/LoginPage/Login'
 import Signup from './Component/LoginPage/Signup'
-import Service from './Component/Service/Service'
+import User from './Component/Users/User'
 
 
 const App = () => {
@@ -18,6 +18,7 @@ const App = () => {
       <Route path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
+      <Route path='/user' element={<User />} />
       </Routes>
     </div>
   )

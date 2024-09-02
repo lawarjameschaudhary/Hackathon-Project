@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { useNavigate } from 'react-router-dom'; 
 
 const Search = () => {
   const [input, setInput] = useState('');
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate(); 
 
   const fetchData = async (value) => {
     const response = await fetch("https://jsonplaceholder.typicode.com/users");
@@ -23,12 +23,12 @@ const Search = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login"); // Navigate to login page after logout
+    navigate("/login"); 
   };
 
   return (
    <div>
-    
+
    </div>
   );
 };

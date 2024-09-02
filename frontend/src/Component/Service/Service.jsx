@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ServiceCard from './ServiceCard';
+import { useServices } from '../../utils';
 
 const Service = () => {
     
@@ -7,45 +8,10 @@ const Service = () => {
     const toggleButton = () => {
         setState(!state)
     }
-    const [services, setServices] = useState([]);
+    const { services, error, loading } = useServices();
 
-    useEffect(() => {
-      const getServices = async () => {
-        try {
-          // Retrieve token from localStorage
-          const token = localStorage.getItem('token');
-  
-          // Check if token exists
-          if (!token) {
-            console.error("No token found in localStorage");
-            return;
-          }
-  
-          // Fetch data from API with token in Authorization header
-          const response = await fetch("http://localhost:8000/api/services", {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`, // Include the token here
-            }
-          });
-  
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-  
-          const data = await response.json();
-          console.log(data);
-          setServices(data); // Update state with fetched data
-        } catch (error) {
-          console.error("Error fetching services:", error);
-        }
-      };
-  
-      getServices();
-    }, []);
-  
-    
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
  
 
   return (
