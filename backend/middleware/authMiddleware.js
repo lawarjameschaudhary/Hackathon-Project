@@ -7,6 +7,7 @@ const authenticateJWT = (req, res, next) => {
     }
 
     const token = authHeader.split(' ')[1]; // Extract the token part after 'Bearer'
+
     
     
     try {

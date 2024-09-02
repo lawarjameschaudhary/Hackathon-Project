@@ -28,6 +28,7 @@ const User = require('../models/User');
  // get all services
  const getAllServices = async (req, res) => {
     try {
+        const isAuthenticated = req.user && req.user.isSeller !== undefined;
         // Find users who are sellers, and populate both the 'username' from the offeredBy and the 'location'
         const users = await User.find({ isSeller: true })
             .populate('service.offeredBy', 'username')

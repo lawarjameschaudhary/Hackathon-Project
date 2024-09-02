@@ -59,4 +59,64 @@ const logoutUser = async (req, res) => {
     }
 };
 
-module.exports = { registerUser, loginUser, logoutUser }
+
+// update profile:
+
+const updateProfile = async (req, res) => {
+    // handel image upload here inside controller
+    try {
+        const userID = req.user.id;
+
+        if(!req.file){
+            return res.status(400).json({ message: 'Please upload an image' });
+        };
+
+        const imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+        const user = await User.findByIdAndUpdate(
+            userID, 
+            {
+                imageUrl: imageUrl
+            }
+        );
+
+        res.status(200).json({ message: 'Profile updated', user });
+
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+        
+    }
+};
+
+// Get the user's profile image
+const getUser = async (req, res) => {
+    try {
+        const userId = req.user.id; // Assuming user authentication
+
+        // Find the user by ID
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // If the user does not have an imageUrl, you can set a default image URL or an empty string
+        const imageUrl = user.imageUrl || 'https://www.istockphoto.com/photos/user-profile'; // Replace with a valid URL for a default image
+
+        res.status(200).json({
+            message: 'User retrieved successfully',
+
+            username: user.username,
+            email: user.email,
+            imageUrl: imageUrl,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Failed to retrieve user',
+            error: error.message,
+        });
+    }
+};
+
+
+
+module.exports = { registerUser, loginUser, logoutUser, updateProfile, getUser }

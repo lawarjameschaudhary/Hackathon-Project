@@ -33,6 +33,8 @@ const userSchema = new mongoose.Schema({
     }],
     additionalInfo: { type: String },
     createdAt: { type: Date, default: Date.now },
+    imageUrl: { type: String },
+    phoneNo: { type: String },
 });
 
 module.exports = mongoose.model('User', userSchema)
