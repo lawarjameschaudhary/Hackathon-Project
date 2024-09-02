@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import toast from 'react-hot-toast';
+import { NavLink } from "react-router-dom";
+import Signup from "./Signup";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -7,15 +9,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Input validation
-    if (password.length < 6) {
-      toast.error("Password must be at least 6 characters long.");
-      return;
-    } else if (password.length > 16) {
-      toast.error("Password must be at most 16 characters long.");
-      return;
-    }
 
     try {
       const response = await fetch("http://localhost:8000/api/users/login", {
@@ -91,6 +84,7 @@ const Login = () => {
               />
             </div>
           </div>
+          <div className="text-blue-500"><NavLink to='/signup'>Didn't have account? signup?</NavLink></div>
           <div>
             <button
               type="submit"

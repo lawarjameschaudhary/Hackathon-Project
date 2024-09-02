@@ -44,7 +44,7 @@ function Navbar() {
             <NavLink className={({isActive}) => isActive? "active text-blue-400" : "text-black"} to='/about'>About</NavLink>
             <NavLink className={({isActive}) => isActive? "active text-blue-400" : "text-black"} to='/something'>Inquiry</NavLink>
             <div className='bg-black px-10 py-2 text-white rounded-md'>
-              user
+              <NavLink to='/user'>user</NavLink>
       </div>
           </div>
           <button onClick={toggleButton} className='flex md:hidden'>

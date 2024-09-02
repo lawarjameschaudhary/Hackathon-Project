@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import Login from './Component/LoginPage/Login'
 import Signup from './Component/LoginPage/Signup'
 import User from './Component/Users/User'
+import AddJobs from './Component/Users/AddJobs'
 
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/user' element={<User />} />
+      <Route path='/addjobs' element={<AddJobs />} />
       </Routes>
     </div>
   )

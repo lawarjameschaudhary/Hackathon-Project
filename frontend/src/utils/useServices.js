@@ -11,23 +11,28 @@ export const useServices = () => {
         const token = localStorage.getItem('token');
 
         if (!token) {
-          throw new Error("No token found in localStorage");
+          throw new Error("Authentication token not found. Please log in.");
         }
 
         const response = await fetch("http://localhost:8000/api/services", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`, 
+            "Authorization": `Bearer ${token}`,
           },
           credentials: "include",
         });
 
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          if (response.status === 401) {
+            throw new Error("Unauthorized access. Please log in again.");
+          } else {
+            throw new Error(`Error: ${response.statusText} (${response.status})`);
+          }
         }
 
         const data = await response.json();
+        console.log(data)
         setServices(data);
       } catch (error) {
         setError(error.message);

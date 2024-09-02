@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import toast from 'react-hot-toast';
 
 const Signup = () => {
-  const [username, setUsername] = useState([]);
+  const [username, setUsername] = useState(""); // Change to string
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -23,19 +23,17 @@ const Signup = () => {
     }
 
     try {
-    
       const response = await fetch("http://localhost:8000/api/users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-
         },
         body: JSON.stringify({
           username: username,
           email: email,
           password: password,
         }),
-        credentials: "include", 
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -47,12 +45,9 @@ const Signup = () => {
       const data = await response.json();
       console.log(data);
 
-     
       if (data.token) {
-    
         localStorage.setItem("token", data.token);
-        
-        window.location.href = "/login";
+        window.location.href = "/login"; // Redirect to login page
       } else {
         toast.error("Signup failed. Please try again.");
       }
@@ -73,19 +68,19 @@ const Signup = () => {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px flex flex-col gap-5">
             <div>
-            <input
-                id="email-address"
-                name="email"
+              <input
+                id="username"
+                name="username"
                 type="text"
-                autoComplete="email"
+                autoComplete="username"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Username"
                 value={username}
-                onChange={(e) => setUsername  (e.target.value)}
+                onChange={(e) => setUsername(e.target.value)} // Corrected onChange handler
               />
             </div>
-            <div>  
+            <div>
               <input
                 id="email-address"
                 name="email"
