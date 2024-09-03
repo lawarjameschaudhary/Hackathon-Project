@@ -8,6 +8,7 @@ const AddJobs = () => {
         username: "",
         serviceName: "",
         description: "",
+        imageUrl: ""
     });
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate(); // Initialize useNavigate hook
@@ -34,7 +35,8 @@ const AddJobs = () => {
             const response = await axios.post("http://localhost:8000/api/services", { 
                 serviceName: jobs.serviceName,
                 description: jobs.description,
-                offeredBy: { username: jobs.username } // Assuming 'username' is used to populate the 'offeredBy' field
+                offeredBy: { username: jobs.username }, // Assuming 'username' is used to populate the 'offeredBy' field
+                imageUrl: jobs.imageUrl,
             }, {
                 headers: {
                     "Authorization": `Bearer ${token}`, // Include token in headers
@@ -43,18 +45,13 @@ const AddJobs = () => {
 
             console.log(response.data, "data");
             toast.success("Job added successfully");
-            setJobs({ username: "", serviceName: "", description: "" }); // Clear form after submission
+            setJobs({ username: "", serviceName: "", description: "", imageUrl: "" }); // Clear form after submission
         } catch (error) {
             console.error("Error adding job:", error);
             toast.error("Failed to add job");
         } finally {
             setLoading(false);
         }
-    };
-
-    const logouthandler = () => {
-        localStorage.removeItem("token");
-        navigate("/login"); // Redirect with useNavigate
     };
 
     if (!localStorage.getItem("token")) {
@@ -65,14 +62,8 @@ const AddJobs = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
             <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-                <button 
-                    onClick={logouthandler} 
-                    className="text-blue-600 hover:underline mb-4"
-                >
-                    Logout
-                </button>
 
-                <h1 className="text-3xl font-bold mb-6 text-center">Admin Page</h1>
+                <h1 className="text-3xl font-bold mb-6 text-center">Post the jobs here</h1>
 
                 <h2 className="text-xl font-semibold mb-4 text-center">Add Job</h2>
 
@@ -104,7 +95,12 @@ const AddJobs = () => {
                             placeholder="Enter description"
                         />
                     </div>
-
+                    <div>
+                        <input type="file" name="image" id="image" 
+                        onChange={(e) => setJobs({ ...jobs, imageUrl: e.target.value})}
+                        value={jobs.imageUrl}
+                         />
+                    </div>
                     <button
                         type="submit"
                         className="w-full px-4 py-2 rounded-md bg-red-600 text-white font-semibold hover:bg-red-700 transition duration-300"

@@ -1,29 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from './Component/NavBar/Navbar';
 import Home from './Component/Home/Home';
-import { Route, Routes } from 'react-router-dom';
 import Login from './Component/LoginPage/Login';
 import Signup from './Component/LoginPage/Signup';
 import User from './Component/Users/User';
 import AddJobs from './Component/Users/AddJobs';
 import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute';
+import { Routes, Route } from 'react-router-dom';
 
 const App = () => {
-  const [results, setResults] = useState([]);
-  const isAuthenticated = true; // Replace with actual authentication logic
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token")); // Initial state based on token presence
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Remove the token from localStorage
+    setIsAuthenticated(false); // Update the state to indicate the user is no longer authenticated
+    navigate("/login"); // Redirect the user to the login page
+  };
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login"); // Redirect to login if not authenticated
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div>
-      {location.pathname !== "/login" && location.pathname !== "/signup" && <Navbar />}
+      {location.pathname !== "/login" && location.pathname !== "/signup" && (
+        <Navbar handleLogout={handleLogout} />
+      )}
       <Routes>
-        <Route path='/' element={<ProtectedRoute isAuthenticated={isAuthenticated} element={Home} />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        {/* <Route path='/user' element={<ProtectedRoute isAuthenticated={isAuthenticated} element={User} />} /> */}
-        <Route path='/addjobs' element={<ProtectedRoute isAuthenticated={isAuthenticated} element={AddJobs} />} />
+        <Route path="/" element={<ProtectedRoute isAuthenticated={isAuthenticated} element={Home} />} />
+        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/addjobs" element={<ProtectedRoute isAuthenticated={isAuthenticated} element={AddJobs} />} />
       </Routes>
     </div>
   );
-}
+};
 
 export default App;

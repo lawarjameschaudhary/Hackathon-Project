@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 function Navbar() {
@@ -9,6 +9,7 @@ function Navbar() {
   const [image, setImage] = useState("");
   const [showFileInput, setShowFileInput] = useState(false); // To toggle file input visibility
   const navigate = useNavigate();
+  const profileRef = useRef(null); // Create a reference for the profile section
 
   const toggleUser = () => {
     setUsers(!users);
@@ -19,7 +20,7 @@ function Navbar() {
   };
 
   const handleImageClick = () => {
-    setShowFileInput(true); // Show the file input when the profile image is clicked
+    setShowFileInput(!showFileInput); // Show the file input when the profile image is clicked
   };
 
   useEffect(() => {
@@ -92,10 +93,31 @@ function Navbar() {
     }
   };
 
+  const handleClickOutside = (event) => {
+    if (profileRef.current && !profileRef.current.contains(event.target)) {
+      setUsers(false);
+    }
+  };
+
+  useEffect(() => {
+    if (users) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [users]);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+};
+
   if (loading) return <div className="text-center text-gray-600">Loading...</div>;
 
   return (
-    <div>
+    <div className=''>
       <div className='bg-rato'>
         <div className='flex justify-between items-center px-3 md:px-24 py-3'>
           <div className="nav-logo text-2xl font-extrabold">
@@ -121,7 +143,7 @@ function Navbar() {
         </div>
       </div>
 
-      <div className='md:hidden flex flex-col relative '>
+      <div className='md:hidden flex flex-col relative'>
         {navButton && (
           <div className='bg-gray-200 absolute right-0 rounded-lg top-0 h-screen w-screen p-3 z-20'>
             <ul className='flex flex-col gap-5'>
@@ -133,48 +155,41 @@ function Navbar() {
         )}
       </div>
 
-      <div className='absolute z-10 right-0'>
-        {users && (
-          <div className="min-h-screen w-[40vh] flex flex-col items-center bg-gray-50">
-            <div className="max-w-3xl w-full rounded-lg p-6">
-              <h1 className="text-3xl font-bold text-center mb-6">User Profile</h1>
-              {user ? (
-                <div>
-                  <div className="mt-4 text-center"> 
-                    <img
-                      src={image}
-                      alt="User profile"
-                      className="w-24 h-24 rounded-full mx-auto cursor-pointer"
-                      onClick={handleImageClick} // Handle image click
-                    />
-                  </div>
-                  {showFileInput && (
-                    <form onSubmit={handleUpload} className="mt-4">
-                      <div className="mb-4">
-                        <input type="file" name="image" id="image" className="mt-1" required />
-                      </div>
-                      <button
-                        type="submit"
-                        className="inline-block px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition duration-300"
-                      >
-                        Submit
-                      </button>
-                    </form>
-                  )}
-                 <div className='flex flex-col gap-8 mt-6'>
-                 <div className="mt-4">
-                    <p className="text-xl font-semibold">Username:</p>
-                    <p className="text-gray-700">{user.username}</p>
-                  </div>
-                  <div className="mb-4">
-                    <p className="text-xl font-semibold">Email:</p>
-                    <p className="text-gray-700">{user.email}</p>
-                  </div>
-                 </div>
+      <div className={`fixed top-0 right-0 z-50 w-[40vh] h-full bg-gray-50 transition-transform duration-300 transform ${users ? 'translate-x-0' : 'translate-x-full'}`} ref={profileRef}>
+        {user && (
+          <div className="flex flex-col items-center p-6">
+            <h1 className="text-3xl font-bold text-center mb-6">User Profile</h1>
+            <div className="mt-4 text-center">
+              <img
+                src={image}
+                alt="User profile"
+                className="w-24 h-24 rounded-full mx-auto cursor-pointer"
+                onClick={handleImageClick} // Handle image click
+              />
+            </div>
+            {showFileInput && (
+              <form onSubmit={handleUpload} className="mt-4">
+                <div className="mb-4">
+                  <input type="file" name="image" id="image" className="mt-1" required />
                 </div>
-              ) : (
-                <p className="text-center text-gray-600">No user data available</p>
-              )}
+                <button
+                  type="submit"
+                  className="inline-block px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition duration-300"
+                >
+                  Submit
+                </button>
+              </form>
+            )}
+            <div className='flex flex-col gap-8 mt-6'>
+              <div className="mt-4">
+                <p className="text-xl font-semibold">Username:</p>
+                <p className="text-gray-700">{user.username}</p>
+              </div>
+              <div className="mb-4">
+                <p className="text-xl font-semibold">Email:</p>
+                <p className="text-gray-700">{user.email}</p>
+              </div>
+              <div className='bg-red-500 px-10 flex items-center justify-center py-3 rounded-md font-ajhai-arko text-white text-xl'><button onClick={handleLogout}>Logout</button></div>
             </div>
           </div>
         )}
