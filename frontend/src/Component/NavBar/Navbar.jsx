@@ -60,7 +60,7 @@ function Navbar() {
             <ul className='flex flex-col gap-5'>
               <li>Switch</li>
               <li>About</li>
-              <li>Something</li>
+              <li>Inquiry</li>
             </ul>
           </div>
         )}

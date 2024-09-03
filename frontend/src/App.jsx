@@ -7,6 +7,8 @@ import Login from './Component/LoginPage/Login'
 import Signup from './Component/LoginPage/Signup'
 import User from './Component/Users/User'
 import AddJobs from './Component/Users/AddJobs'
+import About from './Component/About/About'
+import Contact from './Component/Contact/Contact'
 
 
 const App = () => {
@@ -21,6 +23,9 @@ const App = () => {
       <Route path='/signup' element={<Signup />} />
       <Route path='/user' element={<User />} />
       <Route path='/addjobs' element={<AddJobs />} />
+      <Route path='/about' element={<About/>} />
+      <Route path='/contact' element={<Contact/>} />
+      
       </Routes>
     </div>
   )

@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        "rato" : "",
+        "gay" : "#808080",
         "xer" : "#50C878"
 
       },

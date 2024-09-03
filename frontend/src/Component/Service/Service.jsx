@@ -38,7 +38,7 @@ const Service = () => {
                         <button>Services</button>
                     </div>
                 </div>
-                <div className="services absolute top-20 h-[200vh] px-14 py-10 flex flex-col gap-10 font-ajhai-arko border-r-2 text-xl bg-rato">
+                <div className="services absolute top-20 h-[200vh] md:px-14 py-10 hidden gap-10 font-ajhai-arko border-r-2 text-xl bg-rato md:flex md:flex-col">
                     <div
                         className={`border-b-4 hover:border-white cursor-pointer ${selectedService === 'All' ? 'border-white' : ''}`}
                         onClick={() => handleServiceSelection('All')}
@@ -71,8 +71,8 @@ const Service = () => {
                     </div>
                 </div>
             </div>
-            <div className="mt-6 ml-[294px]">
-                <div className="grid grid-cols-3 gap-4">
+            <div className="mt-6 md:ml-[294px]">
+                <div className="grid grid-cols-2 md:grid-cols-3   gap-4">
                     {filteredServices.length > 0 ? (
                         filteredServices.map((item, index) => (
                             <ServiceCard data={item} key={index} />
