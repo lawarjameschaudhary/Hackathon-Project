@@ -12,7 +12,7 @@ const updateUserToSeller = async (req, res) => {
 
         user.location = { toleName, ward, city, state };
 
-        user.isSeller = true;
+        user.appliedForSeller = true;
 
         await user.save();
 

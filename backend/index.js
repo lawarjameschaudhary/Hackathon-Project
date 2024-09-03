@@ -5,6 +5,7 @@ const connectDB = require("./config/db");
 const userRoutes = require('./routes/userRoutes');
 const sellerRoutes = require('./routes/sellerRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 
 // configure dotenv
@@ -31,6 +32,7 @@ app.use(cors({
 app.use('/api/users', userRoutes);
 app.use('/api/sellers', sellerRoutes);
 app.use('/api/services', serviceRoutes);
+app.use('/api/admin', adminRoutes);
 
 // start server
 const PORT = process.env.PORT || 5000;

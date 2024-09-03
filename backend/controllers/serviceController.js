@@ -32,13 +32,14 @@ const User = require('../models/User');
         // Find users who are sellers, and populate both the 'username' from the offeredBy and the 'location'
         const users = await User.find({ isSeller: true })
             .populate('service.offeredBy', 'username')
-            .select('service location'); // Select both the service and location fields
+            .select('service location imageUrl'); // Select both the service and location fields
 
         // Flatten the service array while also attaching the location to each service
         const services = users.flatMap(user => 
             user.service.map(service => ({
                 ...service.toObject(), // Convert the service to a plain object
-                location: user.location // Add the location from the user
+                location: user.location, // Add the location from the user
+                imageUrl: user.imageUrl // Add the imageUrl from the user
             }))
         );
 
