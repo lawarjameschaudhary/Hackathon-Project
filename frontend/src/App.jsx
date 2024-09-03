@@ -1,38 +1,29 @@
 import React, { useState } from 'react';
 import Navbar from './Component/NavBar/Navbar';
 import Home from './Component/Home/Home';
-import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Login from './Component/LoginPage/Login';
 import Signup from './Component/LoginPage/Signup';
 import User from './Component/Users/User';
 import AddJobs from './Component/Users/AddJobs';
-import { Toaster } from 'react-hot-toast';
-import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute'; // Import the PrivateRoute component
+import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute';
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // State to track if the user is authenticated
-  const location = useLocation();
+  const [results, setResults] = useState([]);
+  const isAuthenticated = true; // Replace with actual authentication logic
 
   return (
     <div>
-      <Toaster />
-      {location.pathname !== '/login' && location.pathname !== '/signup' && <Navbar />}
+      {location.pathname !== "/login" && location.pathname !== "/signup" && <Navbar />}
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path='/' element={<ProtectedRoute isAuthenticated={isAuthenticated} element={Home} />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-        {/* Protect these routes */}
-        <Route
-          path='/user'
-          element={<ProtectedRoute element={User} isAuthenticated={isAuthenticated} />}
-        />
-        <Route
-          path='/addjobs'
-          element={<ProtectedRoute element={AddJobs} isAuthenticated={isAuthenticated} />}
-        />
+        {/* <Route path='/user' element={<ProtectedRoute isAuthenticated={isAuthenticated} element={User} />} /> */}
+        <Route path='/addjobs' element={<ProtectedRoute isAuthenticated={isAuthenticated} element={AddJobs} />} />
       </Routes>
     </div>
   );
-};
+}
 
 export default App;
