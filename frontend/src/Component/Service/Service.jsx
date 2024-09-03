@@ -65,7 +65,7 @@ const Service = () => {
                     </div>
                     <div
                         className={`border-b-4 hover:border-white cursor-pointer ${selectedService === 'Tutor' ? 'border-white' : ''}`}
-                        onClick={() => handleServiceSelection('Tutor')}
+                        onClick={() => handleServiceSelection('tutor')}
                     >
                         Tutor
                     </div>

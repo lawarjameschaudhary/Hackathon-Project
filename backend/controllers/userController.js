@@ -104,10 +104,14 @@ const getUser = async (req, res) => {
 
         res.status(200).json({
             message: 'User retrieved successfully',
-
             username: user.username,
             email: user.email,
             imageUrl: imageUrl,
+            phoneNo: user.phoneNo || 'Not provided',
+            location: {
+                city: user.location.city || 'Not provided',
+                state: user.location.state || 'Not provided',}
+            
         });
     } catch (error) {
         res.status(500).json({

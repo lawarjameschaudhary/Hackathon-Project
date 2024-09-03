@@ -32,7 +32,7 @@ export const useServices = () => {
         }
 
         const data = await response.json();
-        console.log(data)
+        // console.log(data)
         setServices(data);
       } catch (error) {
         setError(error.message);

@@ -65,4 +65,4 @@ const ProductSlider = () => {
   );
 }
 
-export default ProductSlider;
+export default ProductSlider;   
