@@ -109,14 +109,7 @@ function User() {
                             <p className="text-xl font-semibold">Email:</p>
                             <p className="text-gray-700">{user.email}</p>
                         </div>
-                        <div className="text-center mt-6">
-                            <NavLink
-                                to="/addjobs"
-                                className="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition duration-300"
-                            >
-                                Add Jobs
-                            </NavLink>
-                        </div>
+                    
                     </div>
                 ) : (
                     <p className="text-center text-gray-600">No user data available</p>
