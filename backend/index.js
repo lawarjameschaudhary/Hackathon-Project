@@ -1,11 +1,13 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require('cors');
+const path = require('path')
 const connectDB = require("./config/db");
 const userRoutes = require('./routes/userRoutes');
 const sellerRoutes = require('./routes/sellerRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+
 
 
 // configure dotenv
@@ -27,6 +29,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
     optionsSuccessStatus: 200
 }));
+app.use('/images', express.static(path.join(__dirname, 'uploads')))
 
 // routes
 app.use('/api/users', userRoutes);
