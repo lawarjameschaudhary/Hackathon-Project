@@ -36,6 +36,8 @@ const App = () => {
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/addjobs" element={<ProtectedRoute isAuthenticated={isAuthenticated} element={AddJobs} />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/contactus' element={<Contact />} />
       </Routes>
     </div>
   );
