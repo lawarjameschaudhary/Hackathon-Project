@@ -32,6 +32,7 @@ function User() {
                 }
 
                 const data = response.data;
+                console.log(data);
                 setImage(data.imageUrl);
                 setUser(data);
             } catch (error) {
