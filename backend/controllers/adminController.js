@@ -80,4 +80,17 @@ const declineSeller = async (req, res) => {
     }
 };
 
-module.exports = { approveSeller, declineSeller, adminLogin, adminRegister };
+// get seller who applied for seller
+
+const getSellersApplication = async (req, res) => {
+    try {
+        const users = await User.find({ appliedForSeller: true, approvedByAdmin: false }).select('username email isSeller location phoneNo service imageUrl');
+        if (users.length === 0) return res.status(404).json({ message: 'No Current Applications' });
+        res.status(200).json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
+
+module.exports = { approveSeller, declineSeller, adminLogin, adminRegister, getSellersApplication };

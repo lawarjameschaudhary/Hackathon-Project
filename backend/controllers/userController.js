@@ -100,7 +100,7 @@ const getUser = async (req, res) => {
         }
 
         // If the user does not have an imageUrl, you can set a default image URL or an empty string
-        const imageUrl = user.imageUrl || 'https://www.istockphoto.com/photos/user-profile'; // Replace with a valid URL for a default image
+        const imageUrl = user.imageUrl || 'https://media.istockphoto.com/id/1394347648/photo/young-black-businesswoman-working-on-a-laptop-in-an-office-alone.jpg?s=612x612&w=0&k=20&c=Is-4w4fhBDrAOSKtJkDIhCDoQ9DXI2bDfW_ASS2TN08='; // Replace with a valid URL for a default image
 
         res.status(200).json({
             message: 'User retrieved successfully',

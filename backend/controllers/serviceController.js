@@ -28,23 +28,30 @@ const User = require('../models/User');
  // get all services
  const getAllServices = async (req, res) => {
     try {
+        // Check if the user is authenticated
         const isAuthenticated = req.user && req.user.isSeller !== undefined;
+
+        // if (!isAuthenticated) {
+        //     return res.status(401).json({ message: 'Unauthorized' });
+        // }
+
         // Find users who are sellers, and populate both the 'username' from the offeredBy and the 'location'
         const users = await User.find({ isSeller: true })
-            .populate('service.offeredBy', 'username')
-            .select('service location imageUrl'); // Select both the service and location fields
+            .populate('service.offeredBy', 'username') 
+            .select('service location imageUrl');
 
         // Flatten the service array while also attaching the location to each service
         const services = users.flatMap(user => 
             user.service.map(service => ({
-                ...service.toObject(), // Convert the service to a plain object
-                location: user.location, // Add the location from the user
-                imageUrl: user.imageUrl // Add the imageUrl from the user
+                ...service.toObject(),
+                location: user.location, 
+                imageUrl: user.imageUrl 
             }))
         );
 
         res.json(services);
     } catch (error) {
+        console.error('Error fetching services:', error);
         res.status(500).json({ message: 'Server Error' });
     }
 };
