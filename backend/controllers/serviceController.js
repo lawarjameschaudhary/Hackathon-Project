@@ -31,9 +31,9 @@ const User = require('../models/User');
         // Check if the user is authenticated
         const isAuthenticated = req.user && req.user.isSeller !== undefined;
 
-        if (!isAuthenticated) {
-            return res.status(401).json({ message: 'Unauthorized' });
-        }
+        // if (!isAuthenticated) {
+        //     return res.status(401).json({ message: 'Unauthorized' });
+        // }
 
         // Find users who are sellers, and populate both the 'username' from the offeredBy and the 'location'
         const users = await User.find({ isSeller: true })
