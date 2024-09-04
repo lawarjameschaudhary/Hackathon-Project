@@ -4,7 +4,6 @@ import Navbar from './Component/NavBar/Navbar';
 import Home from './Component/Home/Home';
 import Login from './Component/LoginPage/Login';
 import Signup from './Component/LoginPage/Signup';
-import User from './Component/Users/User';
 import AddJobs from './Component/Users/AddJobs';
 import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute';
 import { Routes, Route } from 'react-router-dom';
