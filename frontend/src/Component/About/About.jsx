@@ -5,7 +5,7 @@ const About = () => {
   const navigate = useNavigate(); 
 
   const handleClick = () => {
-    navigate("/contact"); route
+    navigate("/contactus"); route
   };
 
   return (

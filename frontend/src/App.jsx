@@ -7,6 +7,8 @@ import Signup from './Component/LoginPage/Signup';
 import AddJobs from './Component/Users/AddJobs';
 import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute';
 import { Routes, Route } from 'react-router-dom';
+import About from './Component/About/About';
+import Contact from './Component/Contact/Contact';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token")); // Initial state based on token presence

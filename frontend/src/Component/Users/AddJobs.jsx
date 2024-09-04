@@ -96,6 +96,24 @@ const AddJobs = () => {
                         />
                     </div>
                     <div>
+                        <input
+                            onChange={(e) => setJobs({ ...jobs, description: e.target.value })}
+                            value={jobs.description}
+                            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            type="text"
+                            placeholder="Enter description"
+                        />
+                    </div>
+                    <div>
+                        <input
+                            onChange={(e) => setJobs({ ...jobs, description: e.target.value })}
+                            value={jobs.description}
+                            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            type="text"
+                            placeholder="Enter description"
+                        />
+                    </div>
+                    <div>
                         <input type="file" name="image" id="image" 
                         onChange={(e) => setJobs({ ...jobs, imageUrl: e.target.value})}
                         value={jobs.imageUrl}
