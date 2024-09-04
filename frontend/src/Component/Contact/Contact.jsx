@@ -50,16 +50,6 @@ const Contact = () => {
           />
         </label>
         <label className="flex flex-col">
-          <span className="text-lg font-medium text-gray-800">Message:</span>
-          <textarea
-            name="message" // Match this with your emailJS template fields
-            className="p-2 border border-gray-300 rounded-lg"
-            rows="4"
-            placeholder="Your Message"
-            required
-          ></textarea>
-        </label>
-        <label className="flex flex-col">
           <span className="text-lg font-medium text-gray-800">Contact Number:</span>
           <input
             type="text"
@@ -79,6 +69,17 @@ const Contact = () => {
             required
           />
         </label>
+        <label className="flex flex-col">
+          <span className="text-lg font-medium text-gray-800">Message:</span>
+          <textarea
+            name="message" // Match this with your emailJS template fields
+            className="p-2 border border-gray-300 rounded-lg"
+            rows="4"
+            placeholder="Your Message"
+            required
+          ></textarea>
+        </label>
+       
         <button
           type="submit"
           className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition"
