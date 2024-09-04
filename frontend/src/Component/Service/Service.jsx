@@ -71,7 +71,7 @@ const Service = () => {
                     </div>
                 </div>
             </div>
-            <div className="mt-6 md:ml-[294px]">
+            <div className="ml-[230px] mr-9">
                 <div className="grid grid-cols-2 md:grid-cols-3   gap-4">
                     {filteredServices.length > 0 ? (
                         filteredServices.map((item, index) => (

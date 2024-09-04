@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const ServiceCard = (props) => {
 
@@ -11,6 +12,7 @@ const ServiceCard = (props) => {
         <h1>Provider : {props.data.offeredBy.username}</h1>
         <h1>Servicename : {props.data.serviceName}</h1>
         <h1>Description : {props.data.description}</h1>
+        <button className='bg-green-500 p-12'><NavLink className="">Hire me</NavLink></button>
         </div>
     </div>
   )

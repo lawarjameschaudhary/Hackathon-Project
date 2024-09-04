@@ -60,7 +60,6 @@ function User() {
                     "Content-Type": "multipart/form-data", // Ensure correct content type
                 },
             });
-
             if (response.status === 200) {
                 const updatedUser = response.data.user;
                 setUser(updatedUser);
