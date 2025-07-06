@@ -1,6 +1,6 @@
-# Hackathon Backend API (Express.js)
+# Mero Kaam Backend API (Express.js)
 
-This is the backend for the Hackathon project built using **Express.js**. It provides RESTful APIs for user registration, authentication, seller onboarding, and service management.
+This is the backend for the Hackathon project: (Mero Kaam) built using **Express.js**. It provides RESTful APIs for user registration, authentication, seller onboarding, and service management.
 
 All endpoints are tested using **Postman**.
 
